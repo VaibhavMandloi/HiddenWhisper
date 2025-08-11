@@ -6,15 +6,11 @@ import { Message } from '@/model/User';
 import { NextRequest } from 'next/server';
 import { authOptions } from '../../auth/[...nextauth]/options';
 
-interface DeleteMessageContext {
-  params: { messageid: string };
-}
-
 export async function DELETE(
   request: NextRequest,
-  context: DeleteMessageContext
+  {params}: any
 ) {
-  const messageId = context.params.messageid;
+  const messageId = params.messageid;
   await dbConnect();
   const session = await getServerSession(authOptions);
   const _user: User = session?.user;
